@@ -57,5 +57,3 @@ it.skip("renders a disabled button", () => {
 
   expect(handleClick).toHaveBeenCalledTimes(0);
 });
-
-// test
