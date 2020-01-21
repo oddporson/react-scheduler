@@ -29,9 +29,12 @@ storiesOf("DayListItem", module) //Initiates storybook and registers our DayList
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
   }) // provides the default background color for our component
-  .add("Unselected", () => <DayListItem name="Monday" spots={5} />)
+  .add("Unselected", () => <DayListItem name="Monday" spots={5} />) // To define our stories, we call add() once for each of our test states to generate a story
   .add("Selected", () => <DayListItem name="Monday" spots={5} selected />)
   .add("Full", () => <DayListItem name="Monday" spots={0} />)
   .add("Clickable", () => (
-    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
+    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> // action() allows us to create a callback that appears in the actions panel when clicked
   ));
+
+
+  
