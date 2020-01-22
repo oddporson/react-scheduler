@@ -166,6 +166,6 @@ storiesOf("InterviewerList", module)
     .add("Status", () => <Status message="Deleting" />)
     .add("Error", () => <Error message="Could not delete appointment" onClose={action("onClose")} />)
     .add("Create", () => <Form interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")} onSubmit={action("onSubmit")} />)
-    .add("Edit", () => <Form name="Porson Lee" interviewers={interviewers} interviewer={interviewer} onSave={action("onSave")} onCancel={action("onCancel")} onSubmit={action("onSubmit")} />)
+    .add("Edit", () => <Form name="Bruce Wayne" interviewers={interviewers} interviewer={interviewer} onSave={action("onSave")} onCancel={action("onCancel")} onSubmit={action("onSubmit")} />)
     
 
