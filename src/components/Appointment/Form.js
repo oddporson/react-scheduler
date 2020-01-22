@@ -7,7 +7,6 @@ export default function Form(props) {
   // Tracking the Form State and adding Default State
   const [name, setName] = useState(props.name || "")
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-
   //Resetting Inputs
   const reset = () => {
     setName("");
@@ -17,7 +16,6 @@ export default function Form(props) {
     reset();
     props.onCancel();
   }
-
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
