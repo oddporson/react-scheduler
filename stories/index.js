@@ -157,11 +157,15 @@ storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }]
   })
-  .add("Appointment", () => (
-    <Appointment 
-    />
-  ))
-  // .add("Appointment with Time", () => <Appointment time="5pm" />)
+  // .add("Appointment", () => (
+  //   <Appointment 
+  //   />
+  // ))
+  // .add("Appointment with Time", () => (
+  //   <Appointment 
+  //     time="5pm" 
+  //   />
+  // ))
   .add("Header", () =>(
     <Header 
       time="12pm" 
