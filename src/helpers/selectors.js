@@ -1,20 +1,24 @@
 const getAppointmentsForDay = function(state, day) {
   const findDay = state.days.find(weekDay => (weekDay.name === day ));
-  // console.log("state days--->:", state.days);
-  // console.log("day --->", day);
   if(!findDay) {
       return [];
-    }
-    
-    const arrayReturned = findDay.appointments.map(id => state.appointments[id])
+  }  
+  const arrayReturned = findDay.appointments.map(id => state.appointments[id])
     return arrayReturned; 
-  
 }
 
-module.exports = { getAppointmentsForDay }
+const getInterview = function(state, interview) {
 
-  // console.log("state days--->:", state.days.find)
-  // console.log("day -->", day)
-  // const foo = state.days;
-  // console.log("woah -->", foo)
-  // console.log("name -->", foo.name)
+  // getInterview returns null if no interview is booked
+  if(!interview) {
+    return null;
+  }
+  
+  // getInterview returns an object with the interviewer data 
+  const interviewObj = {};
+  interviewObj.student = interview.student;
+  interviewObj.interviewer = state.interviewers[interview.interviewer];
+  return interviewObj;
+}
+
+module.exports = { getAppointmentsForDay, getInterview }
