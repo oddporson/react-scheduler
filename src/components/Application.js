@@ -56,13 +56,20 @@ export default function Application(props) {
  
   const [state, setState] = useState({day: "Monday", days: [], appointments: {}})
   const setDay = day => setState({ ...state, day });
-  const setDays = days => setState(prev => ({ ...prev, days }));
+  // const setDays = days => setState(prev => ({ ...prev, days }));
+
 
   useEffect(() => {
-    const apiDays = "/api/days";
-    axios.get(apiDays)
-      .then((response) => setDays(response.data)
-      )
+
+    const days = axios.get("/api/days")
+    const appointments = axios.get("/api/appointments")
+    
+    Promise.all([
+      Promise.resolve(days),
+      Promise.resolve(appointments)
+    ]).then((all) => 
+      console.log(all)
+    )
   }, [])
 
   const ScheduleList = appointments.map((appointment) => (
