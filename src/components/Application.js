@@ -7,7 +7,7 @@ import Appointment from "components/Appointment";
 const appointments = [
   {
     id: 1,
-    time: "12pm"
+    time: "12pm",
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const appointments = [
     }
   },
   { 
-    id:2,
+    id:3,
     time: "2pm"
   },
   {
@@ -51,17 +51,19 @@ const appointments = [
   }
 ];
 
+
 export default function Application(props) {
+ 
+  const [state, setState] = useState({day: "Monday", days: [], appointments: {}})
+  const setDay = day => setState({ ...state, day });
+  const setDays = days => setState(prev => ({ ...prev, days }));
 
-  const [day, setDay] = useState("Monday")
-  const [days, setDays] = useState([])
-
-useEffect(() => {
-  const apiDays = "/api/days";
-  axios.get(apiDays)
-    .then((response) => setDays(response.data)
-    )
-},[])
+  useEffect(() => {
+    const apiDays = "/api/days";
+    axios.get(apiDays)
+      .then((response) => setDays(response.data)
+      )
+  }, [])
 
   const ScheduleList = appointments.map((appointment) => (
       <Appointment 
@@ -82,8 +84,8 @@ useEffect(() => {
           <hr className="sidebar__separator sidebar--centered" />
           <nav className="sidebar__menu">
             <DayList
-              days={days}
-              day={day}
+              days={state.days}
+              day={state.day}
               setDay={setDay}
             />
           </nav>
