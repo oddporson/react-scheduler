@@ -1,5 +1,4 @@
 const getAppointmentsForDay = function(state, day) {
-
   const findDay = state.days.find(weekDay => (weekDay.name === day ));
   // console.log("state days--->:", state.days);
   // console.log("day --->", day);
