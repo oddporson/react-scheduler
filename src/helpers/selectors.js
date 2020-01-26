@@ -1,13 +1,15 @@
-const getAppointmentsForDay = function(state, day) {
+const getAppointmentsForDay = (state, day) => {
+
   const findDay = state.days.find(weekDay => (weekDay.name === day ));
   if(!findDay) {
       return [];
   }  
   const arrayReturned = findDay.appointments.map(id => state.appointments[id])
     return arrayReturned; 
+  
 }
 
-const getInterview = function(state, interview) {
+const getInterview = (state, interview) => {
 
   // getInterview returns null if no interview is booked
   if(!interview) {
