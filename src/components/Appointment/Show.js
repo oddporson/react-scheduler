@@ -8,7 +8,6 @@ export default function Show(props) {
         <section className="interviewer">
           <h4 className="text--light">Interviewer</h4>
           <h3 className="text--regular">{props.interviewer.name}</h3> 
-          {/* replace Sylvia Palmer with {props.interviewer.name} after you fetch interview api */}
         </section>
       </section>
       <section className="appointment__card-right">
