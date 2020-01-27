@@ -5,8 +5,9 @@ import "components/InterviewerList.scss"
 
 
 export default function InterviewerList(props) {
-  
-  const interviewers = props.interviewers.map(interviewer => {
+
+  const interviewersListItem = Object.values(props.interviewers).map(interviewer => {
+    // props.interviewers was showing undefined because it cannot 
     return (
       <InterviewerListItem
         key={interviewer.id}
@@ -21,7 +22,7 @@ export default function InterviewerList(props) {
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
-      <ul className="interviewers__list">{interviewers}</ul>
+      <ul className="interviewers__list">{interviewersListItem}</ul>
     </section>
   );
 }

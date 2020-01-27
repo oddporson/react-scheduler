@@ -5,6 +5,7 @@ import Button from "components/Button";
 export default function Form(props) {
 
   // Tracking the Form State and adding Default State
+  // useState is a custom hook store it as a memory so when the function is run, it doesn't go away. it remembers it and re use it when you refresh a browser page.
   const [name, setName] = useState(props.name || "")
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   //Resetting Inputs

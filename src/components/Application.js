@@ -18,13 +18,13 @@ export default function Application(props) {
     const appointments = axios.get("/api/appointments")
     const interviewers = axios.get("/api/interviewers")
     
+    
     Promise.all([
       Promise.resolve(days),
       Promise.resolve(appointments),
       Promise.resolve(interviewers)
     ]).then((all) => {
       console.log(all)
-      // useState({day: "Monday", days: [], appointments: {}})
       setState( prev => ({ ...prev, days:all[0].data, appointments:all[1].data, interviewers:all[2].data }));
     }
     )
@@ -34,6 +34,7 @@ export default function Application(props) {
 
   const ScheduleList = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview); 
+    // if(!state.interviewers) return null;
 
     return (
       <Appointment 
@@ -41,6 +42,7 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={state.interviewers}
       />
     )
   });
@@ -55,7 +57,7 @@ export default function Application(props) {
           <hr className="sidebar__separator sidebar--centered" />
           <nav className="sidebar__menu">
             <DayList
-              days={state.days}
+              days={state.days} // this is not an object. this is property-value pairs. similarity to key-value pairs in object.
               day={state.day}
               setDay={setDay}
             />
@@ -68,7 +70,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {ScheduleList}
-        <Appointment key="last" time="5pm" />
+        <Appointment key="last" time="5pm" interviewers={ state.interviewers }/>
       </section>
     </main>
   );
