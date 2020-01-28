@@ -37,24 +37,24 @@ export default function Appointment(props) {
   }  
   // delete function for user after they save an appointment
   function deleteAppointment() {
-    // return () => {
       transition(DELETE);
       props.deleteInterview(props.id)
       .then(()=>transition(EMPTY));
-    // }
   }
 
   function confirmDelete() {
-    // return () => {
-      transition(CONFIRM);
-    // };
+    transition(CONFIRM);
   };
-
+  
+  console.log("WHY ARE YOU UNDEFINED?!-->", props.interview)
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {/* {props.interview ? <Show student={props.interview. student} interviewer={props.interview.interviewer} /> : <Empty />} */}
-      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+      {mode === EMPTY && (
+        <Empty 
+          onAdd={() => transition(CREATE)} 
+        />
+      )}
       {mode === SHOW && (
         <Show
           student={props.interview.student}
