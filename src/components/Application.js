@@ -3,14 +3,15 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 export default function Application(props) {
  
-  const [state, setState] = useState({day: "Monday", days: [], appointments: {}, interviewers: {}})
+  const [state, setState] = useState({day: "Monday", days: [], appointments: {}, interviewers: {}}) 
+  // useState is a custom hook that store it as a memory so when the function is run, it doesn't go away. it remembers it and re use it when you refresh a browser page.
   const setDay = day => setState({ ...state, day });
-  // const setDays = days => setState(prev => ({ ...prev, days }));
-
+  const appointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
 
   useEffect(() => {
 
@@ -18,34 +19,31 @@ export default function Application(props) {
     const appointments = axios.get("/api/appointments")
     const interviewers = axios.get("/api/interviewers")
     
-    
     Promise.all([
       Promise.resolve(days),
       Promise.resolve(appointments),
       Promise.resolve(interviewers)
     ]).then((all) => {
-      console.log(all)
+      // console.log(all)
       setState( prev => ({ ...prev, days:all[0].data, appointments:all[1].data, interviewers:all[2].data }));
     }
     )
   }, [])
 
-  const appointments = getAppointmentsForDay(state, state.day);
-
-  const ScheduleList = appointments.map((appointment) => {
+  
+  const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview); 
-    // if(!state.interviewers) return null;
-
     return (
       <Appointment 
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
         interview={interview}
-        interviewers={state.interviewers}
+        interviewers={interviewers}
       />
     )
   });
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -69,8 +67,8 @@ export default function Application(props) {
           />
       </section>
       <section className="schedule">
-        {ScheduleList}
-        <Appointment key="last" time="5pm" interviewers={ state.interviewers }/>
+        {schedule}
+        <Appointment key="last" time="5pm" interviewers={ state.interviewers } />
       </section>
     </main>
   );

@@ -18,8 +18,8 @@ export default function useVisualMode(initial) {
     }
     const back = function() {
       if (history.length > 1) {
-        console.log("length of history-->", history.length);
-        console.log('history -->', history);
+        // console.log("length of history-->", history.length);
+        // console.log('history -->', history);
         history.pop();
         setHistory(history);
         setMode(history[history.length - 1]);

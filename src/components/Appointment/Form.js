@@ -27,7 +27,7 @@ export default function Form(props) {
             name="name"
             type="text"
             placeholder="Enter Student Name"
-            onChange={(event) => setName(event.target.value)} // can be shortwritten to {e => setName(e.target.value)
+            onChange={(event) => setName(event.target.value)} // can be short written to {e => setName(e.target.value)
           />
         </form>
         <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer} />
