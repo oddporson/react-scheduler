@@ -32,6 +32,7 @@ export default function Application(props) {
     const interview = getInterview(state, appointment.interview); 
 
     function bookInterview(id, interview) {
+      
       return new Promise((resolve, reject) => {
         const appointment = {
           ...state.appointments[id],

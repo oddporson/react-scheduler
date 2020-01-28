@@ -1,8 +1,6 @@
 import React from "react";
 import "components/Appointment/styles.scss";
 
-
-// Displays Appointment
 import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
@@ -18,6 +16,7 @@ const CREATE = "CREATE";
 const SAVING = "SAVING";
 const DELETE = "DELETE";
 const CONFIRM = "CONFIRM";
+const EDIT = "EDIT";
 
 export default function Appointment(props) {
 
@@ -46,7 +45,7 @@ export default function Appointment(props) {
     transition(CONFIRM);
   };
   
-  console.log("WHY ARE YOU UNDEFINED?!-->", props.interview)
+  console.log("Why is interviewer undefined?-->", props.interviewer)
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -60,6 +59,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={confirmDelete}
+          onEdit={()=> transition(EDIT)}
         />
       )}
       {mode === CREATE && (
@@ -69,13 +69,29 @@ export default function Appointment(props) {
         onCancel={() => back()}
         />
       )}
-      {mode === SAVING && (<Status message="Saving..."/>)}
-      {mode === DELETE && (<Status message="Deleting..."/>)}
+      {mode === SAVING && (
+        <Status message="Saving..."
+        />
+      )}
+      {mode === DELETE && (
+        <Status message="Deleting..."
+        />
+      )}
       {mode === CONFIRM && (
         <Confirm
           onCancel={() => back()}
           onConfirm={deleteAppointment}
-        />)}
+        />
+      )}
+      {mode === EDIT && (
+        <Form
+          name={props.interview.student}
+          interviewers={props.interviewers}
+          interviewer={props.interview.interviewer.id}
+          onSave={save}
+          onCancel={()=> {back()}}
+        />
+      )}
 
     </article>
   )
