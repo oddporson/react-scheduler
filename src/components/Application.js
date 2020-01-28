@@ -7,18 +7,16 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "help
 
 export default function Application(props) {
  
-  const [state, setState] = useState({day: "Monday", days: [], appointments: {}, interviewers: {}}) 
-  // useState is a custom hook that store it as a memory so when the function is run, it doesn't go away. it remembers it and re use it when you refresh a browser page.
+  const [state, setState] = useState({day: "Monday", days: [], appointments: {}, interviewers: {}});
   const setDay = day => setState({ ...state, day });
-  const appointments = getAppointmentsForDay(state, state.day);
-  const interviewers = getInterviewersForDay(state, state.day);
+ 
+
+
 
   useEffect(() => {
-
     const days = axios.get("/api/days")
     const appointments = axios.get("/api/appointments")
     const interviewers = axios.get("/api/interviewers")
-    
     Promise.all([
       Promise.resolve(days),
       Promise.resolve(appointments),
@@ -26,13 +24,38 @@ export default function Application(props) {
     ]).then((all) => {
       // console.log(all)
       setState( prev => ({ ...prev, days:all[0].data, appointments:all[1].data, interviewers:all[2].data }));
-    }
+      }
     )
   }, [])
 
-  
+ 
+  const appointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
+
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview); 
+    // console.log("lhl ",interview);
+
+    function bookInterview(id, interview) {
+      return new Promise((resolve, reject) => {
+        const appointment = {
+          ...state.appointments[id],
+          interview: { ...interview }
+        };
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
+        setState({
+          ...state,
+          appointments
+        });
+        resolve();
+      })
+    }
+
+   
+
     return (
       <Appointment 
         key={appointment.id}
@@ -40,6 +63,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     )
   });
@@ -72,4 +96,5 @@ export default function Application(props) {
       </section>
     </main>
   );
-}
+
+} // ends Application function
