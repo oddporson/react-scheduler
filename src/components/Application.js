@@ -19,7 +19,6 @@ export default function Application(props) {
       Promise.resolve(appointments),
       Promise.resolve(interviewers)
     ]).then((all) => {
-      // console.log(all)
       setState( prev => ({ ...prev, days:all[0].data, appointments:all[1].data, interviewers:all[2].data }));
       }
     )
@@ -31,7 +30,6 @@ export default function Application(props) {
 
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview); 
-    // console.log("lhl ",interview);
 
     function bookInterview(id, interview) {
       return new Promise((resolve, reject) => {
@@ -54,13 +52,13 @@ export default function Application(props) {
       })
     }
 
-    function deleteInterview(id) { // issue? 
+    function deleteInterview(id) {
       return new Promise((resolve, reject) => {
         const appointment = {
           ...state.appointments[id],
           interview: null
         };
-        console.log("delete interview appointment -->", appointment)
+        console.log("should be able to delete after user click delete icon", appointment)
         const appointments ={
           ...state.appointments,
           [id]: appointment
@@ -76,6 +74,7 @@ export default function Application(props) {
       })
     }
 
+
     return (
       <Appointment 
         key={appointment.id}
@@ -84,7 +83,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
-        deleteInterview={deleteInterview} // issue? 
+        deleteInterview={deleteInterview} 
 
       />
     )
