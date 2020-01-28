@@ -6,7 +6,8 @@ import "components/Appointment/styles.scss";
 import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
-import Form from "components/Appointment/Form"
+import Form from "components/Appointment/Form";
+import Status from "components/Appointment/Status";
 
 import useVisualMode from "hooks/useVisualMode"
 
@@ -17,7 +18,6 @@ const SAVING = "SAVING";
 
 export default function Appointment(props) {
 
-  console.log("printing props ",props);
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -49,6 +49,10 @@ export default function Appointment(props) {
         onSave={save} 
         onCancel={() => back()} 
         onSubmit={() => console.log("onSubmit")} 
+        />
+      )}
+      {mode === SAVING && (
+        <Status message="Saving..."
         />
       )}
 
