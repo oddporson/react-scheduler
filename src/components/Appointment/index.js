@@ -15,6 +15,7 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
+const DELETE = "DELETE";
 
 export default function Appointment(props) {
 
@@ -22,6 +23,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  // save function that is passed to onSave={save};
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -31,6 +33,14 @@ export default function Appointment(props) {
     props.bookInterview(props.id, interview)
     .then(() => transition(SHOW));
   }  
+  // delete function for user after they save an appointment
+  function deleteAppointment() { // issue?
+    // return () => {
+      transition(DELETE);
+      props.deleteInterview(props.id)
+      .then(()=>transition(EMPTY));
+    // }
+  }
 
   return (
     <article className="appointment">
@@ -41,6 +51,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={deleteAppointment} // issue?
         />
       )}
       {mode === CREATE && (
@@ -48,14 +59,12 @@ export default function Appointment(props) {
         interviewers={props.interviewers} 
         onSave={save} 
         onCancel={() => back()} 
-        onSubmit={() => console.log("onSubmit")} 
         />
       )}
-      {mode === SAVING && (
-        <Status message="Saving..."
-        />
-      )}
-      
+      {mode === SAVING && (<Status message="Saving..."/>)}
+      {mode === DELETE && (<Status message="Deleting..."/>)}
+      {/* issue ^? */}
+
 
     </article>
   )

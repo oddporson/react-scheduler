@@ -10,9 +10,6 @@ export default function Application(props) {
   const [state, setState] = useState({day: "Monday", days: [], appointments: {}, interviewers: {}});
   const setDay = day => setState({ ...state, day });
  
-
-
-
   useEffect(() => {
     const days = axios.get("/api/days")
     const appointments = axios.get("/api/appointments")
@@ -28,7 +25,7 @@ export default function Application(props) {
     )
   }, [])
 
- 
+
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
 
@@ -57,7 +54,27 @@ export default function Application(props) {
       })
     }
 
-   
+    function deleteInterview(id) { // issue? 
+      return new Promise((resolve, reject) => {
+        const appointment = {
+          ...state.appointments[id],
+          interview: null
+        };
+        console.log("delete interview appointment -->", appointment)
+        const appointments ={
+          ...state.appointments,
+          [id]: appointment
+        };
+        return axios.delete(`/api/appointments/${id}`)
+        .then(()=> {
+          setState({
+            ...state,
+            appointments
+          });
+          resolve()
+        })
+      })
+    }
 
     return (
       <Appointment 
@@ -67,6 +84,8 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        deleteInterview={deleteInterview} // issue? 
+
       />
     )
   });
