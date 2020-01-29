@@ -1,11 +1,12 @@
 import { useReducer, useEffect } from "react";
 import axios from "axios";
+import searchDayByAppointment from "helpers/selectors"
 
 const SET_DAY = "SET_DAY";
 const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 const SET_INTERVIEW = "SET_INTERVIEW";
 const DELETE_INTERVIEW = "DELETE_INTERVIEW";
-// const SPOT_AVAILABLE = "SPOT_AVAILABLE"; 
+const SPOT_AVAILABLE = "SPOT_AVAILABLE"; 
 
 function reducer(state, action) {
   // console.log(action)
@@ -23,6 +24,29 @@ function reducer(state, action) {
     case DELETE_INTERVIEW: {
       return { ...state, appointments: action.appointments}
     }
+
+    case SPOT_AVAILABLE:
+        const idDay = searchDayByAppointment(action.id, state);
+        const idAppointment = state.days[idDay].appointments;
+        let availability = 0;
+        for (let i = 0; i < idAppointment.length; i++) {
+          if (!state.appointments[idAppointment[i]].interview) {
+            availability += 1;
+          }
+        }
+        return {
+          ...state,
+          days: state.days.map((id, appointmentDay) => {
+            if (appointmentDay !== idDay) {
+              return id
+            } else {
+              return {
+                ...id,
+                spots: availability
+              }
+            }
+          })
+        }
 
     default:
       throw new Error(
@@ -73,7 +97,7 @@ export default function useApplicationData(initial) {
       return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
         dispatch({ type: SET_INTERVIEW, appointments })
-        // dispatch({ type: SPOT_AVAILABLE, id:id})
+        dispatch({ type: SPOT_AVAILABLE, id:id})
       })
   }
 
@@ -90,7 +114,7 @@ export default function useApplicationData(initial) {
    return axios.delete(`/api/appointments/${id}`)
    .then(()=> {
     dispatch({ type: DELETE_INTERVIEW, appointments })
-    // dispatch({ type: SPOT_AVAILABLE, id:id})
+    dispatch({ type: SPOT_AVAILABLE, id:id})
    })
  }
 
