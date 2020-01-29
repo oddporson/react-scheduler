@@ -59,7 +59,6 @@ export default function Appointment(props) {
     transition(CONFIRM);
   };
   
-  console.log("Why is interviewer undefined?-->", props.interviewer)
   return (
     <article className="appointment">
       <Header time={props.time} />
