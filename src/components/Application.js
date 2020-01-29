@@ -33,33 +33,29 @@ export default function Application(props) {
 
     function bookInterview(id, interview) {
       
-      return new Promise((resolve, reject) => {
-        const appointment = {
-          ...state.appointments[id],
-          interview: { ...interview }
-        };
-        const appointments = {
-          ...state.appointments,
-          [id]: appointment
-        };
+      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      };
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+
         return axios.put(`/api/appointments/${id}`, { interview })
         .then(() => {
           setState({
             ...state,
             appointments
           });
-          resolve();
         })
-      })
-    }
+      }
 
     function deleteInterview(id) {
-      return new Promise((resolve, reject) => {
         const appointment = {
           ...state.appointments[id],
           interview: null
         };
-        console.log("should be able to delete after user click delete icon", appointment)
         const appointments ={
           ...state.appointments,
           [id]: appointment
@@ -70,9 +66,7 @@ export default function Application(props) {
             ...state,
             appointments
           });
-          resolve()
         })
-      })
     }
 
 
