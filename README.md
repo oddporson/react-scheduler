@@ -1,23 +1,24 @@
 # Interview Scheduler
+An application that allows users to book mock interviews at Lighthouse Labs with interviewer's availability for each day. 
 
-## Setup
+Stacks: Storybook, React with hooks, Axios, Jest
+
+## Dependencies
+- axios
+- react-dom
+- react-script 
+
+
+## Getting Started
 
 Install dependencies with `npm install`.
-
-## Running Webpack Development Server
-
 ```sh
 npm start
 ```
+## Final Product
 
-## Running Jest Test Framework
+!["screenshot of URLS page"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-main.jpg)
 
-```sh
-npm test
-```
+!["screenshot of URLS page"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-delete.jpg)
 
-## Running Storybook Visual Testbed
-
-```sh
-npm run storybook
-```
+!["screenshot of URLS page"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-main.jpg)
