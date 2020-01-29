@@ -38,7 +38,7 @@ export default function useApplicationData(initial) {
     const appointments = {
       ...state.appointments,
       [id]: appointment
-    };
+    };g
     //make request to save the appointment
       return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
