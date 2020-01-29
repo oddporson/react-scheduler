@@ -45,7 +45,7 @@ export default function Application(props) {
           <hr className="sidebar__separator sidebar--centered" />
           <nav className="sidebar__menu">
             <DayList
-              days={state.days} // this is not an object. this is property-value pairs. similarity to key-value pairs in object.
+              days={state.days}
               day={state.day}
               setDay={setDay}
             />

@@ -5,6 +5,7 @@ const SET_DAY = "SET_DAY";
 const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 const SET_INTERVIEW = "SET_INTERVIEW";
 const DELETE_INTERVIEW = "DELETE_INTERVIEW";
+// const SPOT_AVAILABLE = "SPOT_AVAILABLE"; 
 
 function reducer(state, action) {
   // console.log(action)
@@ -72,6 +73,7 @@ export default function useApplicationData(initial) {
       return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
         dispatch({ type: SET_INTERVIEW, appointments })
+        // dispatch({ type: SPOT_AVAILABLE, id:id})
       })
   }
 
@@ -88,6 +90,7 @@ export default function useApplicationData(initial) {
    return axios.delete(`/api/appointments/${id}`)
    .then(()=> {
     dispatch({ type: DELETE_INTERVIEW, appointments })
+    // dispatch({ type: SPOT_AVAILABLE, id:id})
    })
  }
 

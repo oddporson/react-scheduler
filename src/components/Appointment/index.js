@@ -39,7 +39,7 @@ export default function Appointment(props) {
     .then(() => transition(SHOW))
     .catch(err => {
       transition(ERROR_SAVE, true);
-   console.log("show saving error -->", err);
+  //  console.log("show saving error -->", err);
     })
   } 
 
@@ -50,7 +50,7 @@ export default function Appointment(props) {
       .then(()=>transition(EMPTY))
       .catch(err => {
         transition(ERROR_DELETE, true);
-        console.log("show delete error -->", err);
+        // console.log("show delete error -->", err);
       })
   }
 
