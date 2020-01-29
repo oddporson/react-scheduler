@@ -40,8 +40,6 @@ export default function useApplicationData(initial) {
   });
   
   const setDay = (day) => { 
-    // ...state, 
-    // day 
     dispatch({type: SET_DAY, day})
   };
 
@@ -54,7 +52,6 @@ export default function useApplicationData(initial) {
       Promise.resolve(appointments),
       Promise.resolve(interviewers)
     ]).then((all) => {
-      // setState( prev => ({ ...prev, days:all[0].data, appointments:all[1].data, interviewers:all[2].data }));
       dispatch({ type: SET_APPLICATION_DATA, days:all[0].data, appointments:all[1].data, interviewers:all[2].data })
       }
     )
@@ -74,10 +71,6 @@ export default function useApplicationData(initial) {
     //make request to save the appointment
       return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
-        // setState({
-          // ...state,
-          // appointments
-        // });
         dispatch({ type: SET_INTERVIEW, appointments })
       })
   }
@@ -94,10 +87,6 @@ export default function useApplicationData(initial) {
    };
    return axios.delete(`/api/appointments/${id}`)
    .then(()=> {
-    //  setState({
-    //    ...state,
-    //    appointments
-    //  });
     dispatch({ type: DELETE_INTERVIEW, appointments })
    })
  }
