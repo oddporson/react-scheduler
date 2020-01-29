@@ -17,7 +17,7 @@ export default function useApplicationData(initial) {
   useEffect(() => {
     const days = axios.get("/api/days")
     const appointments = axios.get("/api/appointments")
-    const interviewers = axios.get("/api/interviewers")
+    const interviewers = axios.get("/api/intgerviewers")
     Promise.all([
       Promise.resolve(days),
       Promise.resolve(appointments),
