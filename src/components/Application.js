@@ -24,13 +24,6 @@ export default function Application(props) {
     )
   }, [])
 
-
-  const appointments = getAppointmentsForDay(state, state.day);
-  const interviewers = getInterviewersForDay(state, state.day);
-
-  const schedule = appointments.map((appointment) => {
-  const interview = getInterview(state, appointment.interview); 
-
   function bookInterview(id, interview) {
     // copies specific appointment object with id, as well as the interview object
     const appointment = {
@@ -53,37 +46,42 @@ export default function Application(props) {
   }
 
   function deleteInterview(id) {
-     //set appointment interview to null
-    const appointment = {
-      ...state.appointments[id],
-      interview: null
-    };
-    const appointments ={
-      ...state.appointments,
-      [id]: appointment
-    };
-    return axios.delete(`/api/appointments/${id}`)
-    .then(()=> {
-      setState({
-        ...state,
-        appointments
-      });
-    })
-  }
+    //set appointment interview to null
+   const appointment = {
+     ...state.appointments[id],
+     interview: null
+   };
+   const appointments ={
+     ...state.appointments,
+     [id]: appointment
+   };
+   return axios.delete(`/api/appointments/${id}`)
+   .then(()=> {
+     setState({
+       ...state,
+       appointments
+     });
+   })
+ }
 
+  const appointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
 
-    return (
-      <Appointment 
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        interview={interview}
-        interviewers={interviewers}
-        bookInterview={bookInterview}
-        deleteInterview={deleteInterview} 
+  const schedule = appointments.map((appointment) => {
+  const interview = getInterview(state, appointment.interview); 
 
-      />
-    )
+  return (
+    <Appointment 
+      key={appointment.id}
+      id={appointment.id}
+      time={appointment.time}
+      interview={interview}
+      interviewers={interviewers}
+      bookInterview={bookInterview}
+      deleteInterview={deleteInterview} 
+
+    />
+  )
   });
 
   return (
