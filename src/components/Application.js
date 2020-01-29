@@ -29,45 +29,47 @@ export default function Application(props) {
   const interviewers = getInterviewersForDay(state, state.day);
 
   const schedule = appointments.map((appointment) => {
-    const interview = getInterview(state, appointment.interview); 
+  const interview = getInterview(state, appointment.interview); 
 
-    function bookInterview(id, interview) {
-      
-      const appointment = {
-        ...state.appointments[id],
-        interview: { ...interview }
-      };
-      const appointments = {
-        ...state.appointments,
-        [id]: appointment
-      };
+  function bookInterview(id, interview) {
+    // copies specific appointment object with id, as well as the interview object
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    //Now we have a single appointment object, update this appointment in the appointments object
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    //make request to save the appointment
+      return axios.put(`/api/appointments/${id}`, { interview })
+      .then(() => {
+        setState({
+          ...state,
+          appointments
+        });
+      })
+  }
 
-        return axios.put(`/api/appointments/${id}`, { interview })
-        .then(() => {
-          setState({
-            ...state,
-            appointments
-          });
-        })
-      }
-
-    function deleteInterview(id) {
-        const appointment = {
-          ...state.appointments[id],
-          interview: null
-        };
-        const appointments ={
-          ...state.appointments,
-          [id]: appointment
-        };
-        return axios.delete(`/api/appointments/${id}`)
-        .then(()=> {
-          setState({
-            ...state,
-            appointments
-          });
-        })
-    }
+  function deleteInterview(id) {
+     //set appointment interview to null
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+    const appointments ={
+      ...state.appointments,
+      [id]: appointment
+    };
+    return axios.delete(`/api/appointments/${id}`)
+    .then(()=> {
+      setState({
+        ...state,
+        appointments
+      });
+    })
+  }
 
 
     return (
