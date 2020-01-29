@@ -17,7 +17,7 @@ export default function useApplicationData(initial) {
   useEffect(() => {
     const days = axios.get("/api/days")
     const appointments = axios.get("/api/appointments")
-    const interviewers = axios.get("/api/intgerviewers")
+    const interviewers = axios.get("/api/interviewers")
     Promise.all([
       Promise.resolve(days),
       Promise.resolve(appointments),
@@ -38,7 +38,7 @@ export default function useApplicationData(initial) {
     const appointments = {
       ...state.appointments,
       [id]: appointment
-    };g
+    };
     //make request to save the appointment
       return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
