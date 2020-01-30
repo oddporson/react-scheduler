@@ -18,13 +18,13 @@ npm start
 ## Final Product
 
 ### Main page
-!["screenshot of URLS page"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-main.jpg)
+!["screenshot of main page"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-main.jpg)
 
 ### Delete confirmation
-!["screenshot of URLS page"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-delete.jpg)
+!["screenshot of delete confirmation"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-delete.jpg)
 
 ### Error pop up
-!["screenshot of URLS page"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-error.jpg)
+!["screenshot of error pop up"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-error.jpg)
 
 ### Storybook
-!["screenshot of URLS page"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-storybook.jpg)
+!["screenshot of storybook"](https://github.com/oddporson/react-scheduler/blob/master/docs/scheduler-storybook.jpg)
