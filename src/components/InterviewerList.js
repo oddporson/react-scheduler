@@ -1,13 +1,22 @@
 import React from "react";
 import InterviewerListItem from "components/InterviewerListItem"
 import "components/InterviewerList.scss"
+import PropTypes from "prop-types";
 
+InterviewerList.propTypes = {
+  value: PropTypes.number,
+  onChange: PropTypes.func.isRequired
+};
+
+// console.log("show me the money -->", PropTypes.number);
+// console.log("show me more money -->", PropTypes.func.isRequired);
 
 
 export default function InterviewerList(props) {
 
   const interviewersListItem = Object.values(props.interviewers).map(interviewer => {
     // props.interviewers was showing undefined. Use object.values to show all objects from fetched data of api/interviewers
+ 
     return (
       <InterviewerListItem
         key={interviewer.id}
@@ -26,3 +35,4 @@ export default function InterviewerList(props) {
     </section>
   );
 }
+
