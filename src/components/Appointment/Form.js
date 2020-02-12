@@ -47,7 +47,11 @@ export default function Form(props) {
             onChange={(event) => setName(event.target.value)} // can be short written to {e => setName(e.target.value)
           />
         </form>
-        <section className="validate_appointment">{error}</section>
+
+        <section className="validate_appointment">
+          {error}
+        </section>
+
         <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer} />
       </section>
       <section className="appointment__card-right">
