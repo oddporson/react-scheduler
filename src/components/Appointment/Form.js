@@ -48,7 +48,7 @@ export default function Form(props) {
           />
         </form>
 
-        <section className="validate_appointment">
+        <section className="appointment__validation">
           {error}
         </section>
 
